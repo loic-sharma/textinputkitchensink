@@ -1,8 +1,8 @@
 # textinputplayground
 
-A new Flutter project.
+An example Flutter project that demonstrates some common text input use cases.
 
-## Releasing
+## Releasing on web
   1. flutter build web
   1. rm -rf docs
   1. cp -r build/web/ docs
