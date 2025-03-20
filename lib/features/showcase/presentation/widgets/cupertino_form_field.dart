@@ -11,14 +11,16 @@ class CupertinoFormField extends FormField<String> {
     Widget? suffix,
     bool autocorrect = true,
     TextInputType keyboardType = TextInputType.text,
-    int? maxLines,
+    int? maxLines = 1,
     TextInputAction? textInputAction,
+    List<String>? autofillHints = const <String>[],
   }) : super(
          builder: (FormFieldState<String> state) {
            return Column(
              crossAxisAlignment: CrossAxisAlignment.start,
              children: <Widget>[
                CupertinoTextField(
+                 autofillHints: autofillHints,
                  textInputAction: textInputAction,
                  maxLines: maxLines,
                  keyboardType: keyboardType,

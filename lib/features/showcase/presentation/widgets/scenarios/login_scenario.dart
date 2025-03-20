@@ -64,10 +64,12 @@ class _LoginScenarioState extends State<LoginScenario> {
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: false,
                   validator: _emailValidator,
+                  autofillHints: <String>[AutofillHints.email],
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _passwordController,
+                  autofillHints: <String>[AutofillHints.password],
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText: 'Enter your password',
@@ -113,14 +115,17 @@ class _LoginScenarioState extends State<LoginScenario> {
             child: Column(
               children: <Widget>[
                 CupertinoFormField(
+                  autofillHints: <String>[AutofillHints.email],
                   validator: _emailValidator,
                   controller: _emailController,
                   placeholder: 'Email',
                   prefixIcon: CupertinoIcons.mail,
                   autocorrect: false,
+                  keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 16),
                 CupertinoFormField(
+                  autofillHints: <String>[AutofillHints.password],
                   validator: _passwordValidator,
                   controller: _passwordController,
                   placeholder: 'Password',

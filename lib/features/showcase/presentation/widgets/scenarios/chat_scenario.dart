@@ -71,6 +71,7 @@ class _ChatScenarioState extends State<ChatScenario> {
                   child: TextFormField(
                     onFieldSubmitted: (String value) => _submit(),
                     controller: _controller,
+                    textInputAction: TextInputAction.send,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Color(0xffdddddd),
@@ -110,6 +111,7 @@ class _ChatScenarioState extends State<ChatScenario> {
               children: <Widget>[
                 Flexible(
                   child: CupertinoTextField(
+                    textInputAction: TextInputAction.send,
                     onSubmitted: (String? value) => _submit(),
                     controller: _controller,
                   ),
