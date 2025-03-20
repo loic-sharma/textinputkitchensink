@@ -22,8 +22,8 @@ class ShowcaseHomePage extends StatelessWidget {
             Text(
               'This project demonstrates some basic text input use cases on the web in Flutter.',
             ),
-            RichText(
-              text: TextSpan(
+            Text.rich(
+              TextSpan(
                 text: 'The source code can be found at: ',
                 children: <InlineSpan>[
                   WidgetSpan(
@@ -31,24 +31,25 @@ class ShowcaseHomePage extends StatelessWidget {
                       uri: Uri.parse(
                         'https://www.github.com/justinmc/textinputkitchensink',
                       ),
-                      linkedText:
-                          'github.com/justinmc/textinputkitchensink',
+                      linkedText: 'github.com/justinmc/textinputkitchensink',
                     ),
                   ),
                   TextSpan(text: '.'),
                 ],
               ),
             ),
-            RichText(
-              text: TextSpan(
-                text: 'A similar project written in HTML, CSS, and JavaScript can be found at: ',
+            Text.rich(
+              TextSpan(
+                text:
+                    'A similar project written in HTML, CSS, and JavaScript can be found at: ',
                 children: <InlineSpan>[
                   WidgetSpan(
                     child: _Link(
                       uri: Uri.parse(
                         'https://justinmc.github.io/textinputkitchensink-web/',
                       ),
-                      linkedText: 'justinmc.github.io/textinputkitchensink-web/',
+                      linkedText:
+                          'justinmc.github.io/textinputkitchensink-web/',
                     ),
                   ),
                   TextSpan(text: '.'),
