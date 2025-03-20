@@ -41,68 +41,10 @@ class _SettingsScenarioState extends State<SettingsScenario> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Profile Information',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: _displayNameController,
-            decoration: const InputDecoration(
-              labelText: 'Display Name',
-              hintText: 'Enter your display name',
-              prefixIcon: Icon(Icons.person),
-            ),
-            keyboardType: TextInputType.name,
-            textInputAction: TextInputAction.next,
-            autofillHints: const [AutofillHints.nickname],
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: _emailController,
-            decoration: const InputDecoration(
-              labelText: 'Email Address',
-              hintText: 'Enter your email',
-              prefixIcon: Icon(Icons.email),
-            ),
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-            autofillHints: const [AutofillHints.email],
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: _phoneController,
-            decoration: const InputDecoration(
-              labelText: 'Phone Number',
-              hintText: 'Enter your phone number',
-              prefixIcon: Icon(Icons.phone),
-            ),
-            keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.done,
-            autofillHints: const [AutofillHints.telephoneNumber],
-          ),
-          const SizedBox(height: 24),
-          const Text(
             'Preferences',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          SwitchListTile(
-            title: const Text('Email Notifications'),
-            subtitle: const Text('Receive updates via email'),
-            value: _emailNotifications,
-            onChanged: (value) {
-              setState(() => _emailNotifications = value);
-            },
-          ),
-          SwitchListTile(
-            title: const Text('Push Notifications'),
-            subtitle: const Text('Receive push notifications'),
-            value: _pushNotifications,
-            onChanged: (value) {
-              setState(() => _pushNotifications = value);
-            },
-          ),
-          const SizedBox(height: 8),
           ListTile(
             title: const Text('Theme'),
             trailing: DropdownButton<String>(
@@ -122,8 +64,6 @@ class _SettingsScenarioState extends State<SettingsScenario> {
               },
             ),
           ),
-          const SizedBox(height: 24),
-          FilledButton(onPressed: () {}, child: const Text('Save Changes')),
         ],
       ),
     );
