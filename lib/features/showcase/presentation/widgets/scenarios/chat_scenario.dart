@@ -16,13 +16,34 @@ class ChatScenario extends StatefulWidget {
 }
 
 class _ChatScenarioState extends State<ChatScenario> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _controller = TextEditingController();
+
+  final List<_Message> _messages = <_Message>[
+    _Message(
+      sender: _Sender.me,
+      text:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    ),
+    _Message(
+      sender: _Sender.someoneElse,
+      text:
+          'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    ),
+  ];
+
+  void _submit() {
+    if (_controller.text.isEmpty) {
+      return;
+    }
+    setState(() {
+      _messages.add(_Message(text: _controller.text, sender: _Sender.me));
+      _controller.clear();
+    });
+  }
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -35,24 +56,21 @@ class _ChatScenarioState extends State<ChatScenario> {
             Expanded(
               child: ListView(
                 reverse: true,
-                children: <Widget>[
-                  _Message(
-                    sender: _Sender.me,
-                    text:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                  ),
-                  _Message(
-                    sender: _Sender.someoneElse,
-                    text:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                  ),
-                ],
+                children:
+                    _messages.reversed
+                        .map(
+                          (_Message message) =>
+                              _MessageWidget(message: message),
+                        )
+                        .toList(),
               ),
             ),
             Row(
               children: <Widget>[
                 Flexible(
                   child: TextFormField(
+                    onFieldSubmitted: (String value) => _submit(),
+                    controller: _controller,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Color(0xffdddddd),
@@ -60,12 +78,7 @@ class _ChatScenarioState extends State<ChatScenario> {
                     ),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    // TODO(justinmc): Submit.
-                  },
-                  icon: Icon(Icons.send),
-                ),
+                IconButton(onPressed: _submit, icon: Icon(Icons.send)),
               ],
             ),
             SizedBox(height: 8.0),
@@ -84,27 +97,25 @@ class _ChatScenarioState extends State<ChatScenario> {
             Expanded(
               child: ListView(
                 reverse: true,
-                children: <Widget>[
-                  _Message(
-                    sender: _Sender.me,
-                    text:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                  ),
-                  _Message(
-                    sender: _Sender.someoneElse,
-                    text:
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                  ),
-                ],
+                children:
+                    _messages.reversed
+                        .map(
+                          (_Message message) =>
+                              _MessageWidget(message: message),
+                        )
+                        .toList(),
               ),
             ),
             Row(
               children: <Widget>[
-                Flexible(child: CupertinoTextField()),
+                Flexible(
+                  child: CupertinoTextField(
+                    onSubmitted: (String? value) => _submit(),
+                    controller: _controller,
+                  ),
+                ),
                 CupertinoButton(
-                  onPressed: () {
-                    // TODO(justinmc): Submit.
-                  },
+                  onPressed: _submit,
                   child: Icon(CupertinoIcons.arrow_right),
                 ),
               ],
@@ -124,18 +135,24 @@ class _ChatScenarioState extends State<ChatScenario> {
   }
 }
 
-class _Message extends StatelessWidget {
+class _Message {
   const _Message({required this.text, required this.sender});
 
   final String text;
   final _Sender sender;
+}
 
-  Color get _backgroundColor => switch (sender) {
+class _MessageWidget extends StatelessWidget {
+  const _MessageWidget({required this.message});
+
+  final _Message message;
+
+  Color get _backgroundColor => switch (message.sender) {
     _Sender.me => Colors.blue,
     _Sender.someoneElse => Colors.grey,
   };
 
-  Color get _textColor => switch (sender) {
+  Color get _textColor => switch (message.sender) {
     _Sender.me => Colors.white,
     _Sender.someoneElse => Colors.black,
   };
@@ -147,7 +164,7 @@ class _Message extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          if (sender == _Sender.me) SizedBox(width: 24.0),
+          if (message.sender == _Sender.me) SizedBox(width: 24.0),
           Expanded(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -156,11 +173,11 @@ class _Message extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(text, style: TextStyle(color: _textColor)),
+                child: Text(message.text, style: TextStyle(color: _textColor)),
               ),
             ),
           ),
-          if (sender == _Sender.someoneElse) SizedBox(width: 24.0),
+          if (message.sender == _Sender.someoneElse) SizedBox(width: 24.0),
         ],
       ),
     );
