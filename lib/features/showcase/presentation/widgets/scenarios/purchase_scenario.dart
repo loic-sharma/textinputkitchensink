@@ -255,7 +255,9 @@ class _PurchaseScenarioState extends State<PurchaseScenario> {
             ),
             const SizedBox(height: 24),
             FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               child: const Text('Complete Purchase'),
             ),
           ],
@@ -467,7 +469,9 @@ class _PurchaseScenarioState extends State<PurchaseScenario> {
             ),
             const SizedBox(height: 24),
             CupertinoButton.filled(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               child: const Text('Complete Purchase'),
             ),
           ],

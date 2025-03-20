@@ -5,6 +5,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/enums/widget_style.dart';
+import '../cupertino_form_field.dart';
 
 class LoginScenario extends StatefulWidget {
   final WidgetStyle style;
@@ -111,7 +112,7 @@ class _LoginScenarioState extends State<LoginScenario> {
             key: _formKeyCupertino,
             child: Column(
               children: <Widget>[
-                _CupertinoFormField(
+                CupertinoFormField(
                   validator: _emailValidator,
                   controller: _emailController,
                   placeholder: 'Email',
@@ -119,7 +120,7 @@ class _LoginScenarioState extends State<LoginScenario> {
                   autocorrect: false,
                 ),
                 const SizedBox(height: 16),
-                _CupertinoFormField(
+                CupertinoFormField(
                   validator: _passwordValidator,
                   controller: _passwordController,
                   placeholder: 'Password',
@@ -163,80 +164,4 @@ class _LoginScenarioState extends State<LoginScenario> {
               : _buildCupertinoVersion(),
     );
   }
-}
-
-class _CupertinoFormField extends FormField<String> {
-  _CupertinoFormField({
-    required this.controller,
-    this.placeholder,
-    super.validator,
-    bool obscureText = false,
-    IconData? prefixIcon,
-    Widget? suffix,
-    bool autocorrect = true,
-  }) : super(
-         builder: (FormFieldState<String> state) {
-           return Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-             children: <Widget>[
-               CupertinoTextField(
-                 style: TextStyle(
-                   color:
-                       state.hasError
-                           ? CupertinoColors.destructiveRed
-                           : CupertinoColors.black,
-                 ),
-                 autocorrect: autocorrect,
-                 controller: controller,
-                 obscureText: obscureText,
-                 onChanged: state.didChange,
-                 placeholder: placeholder,
-                 prefix:
-                     prefixIcon == null
-                         ? null
-                         : Padding(
-                           padding: EdgeInsets.only(left: 8),
-                           child: Icon(
-                             prefixIcon,
-                             color:
-                                 state.hasError
-                                     ? CupertinoColors.destructiveRed
-                                     : null,
-                           ),
-                         ),
-                 suffix: suffix,
-                 decoration: BoxDecoration(
-                   border: Border.all(
-                     color:
-                         state.hasError
-                             ? CupertinoColors.destructiveRed
-                             : CupertinoColors.systemGrey,
-                     width: 1.0,
-                   ),
-                   borderRadius: BorderRadius.circular(8.0),
-                 ),
-               ),
-               if (state.hasError)
-                 Padding(
-                   padding: const EdgeInsets.only(top: 5.0),
-                   child: Text(
-                     state.errorText!,
-                     style: TextStyle(color: CupertinoColors.destructiveRed),
-                   ),
-                 ),
-             ],
-           );
-         },
-       );
-
-  final String? placeholder;
-  final TextEditingController controller;
-
-  @override
-  FormFieldState<String> createState() => _CupertinoFormFieldState();
-}
-
-class _CupertinoFormFieldState extends FormFieldState<String> {
-  @override
-  _CupertinoFormField get widget => super.widget as _CupertinoFormField;
 }
