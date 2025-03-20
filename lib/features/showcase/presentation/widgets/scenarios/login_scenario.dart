@@ -163,10 +163,11 @@ class _LoginScenarioState extends State<LoginScenario> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child:
-          widget.style == WidgetStyle.material
-              ? _buildMaterialVersion()
-              : _buildCupertinoVersion(),
+      child: AutofillGroup(
+        child: widget.style == WidgetStyle.material
+            ? _buildMaterialVersion()
+            : _buildCupertinoVersion(),
+      ),
     );
   }
 }

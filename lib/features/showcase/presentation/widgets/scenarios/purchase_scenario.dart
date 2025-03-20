@@ -482,8 +482,10 @@ class _PurchaseScenarioState extends State<PurchaseScenario> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.style == WidgetStyle.material
-        ? _buildMaterialVersion()
-        : _buildCupertinoVersion();
+    return AutofillGroup(
+      child: widget.style == WidgetStyle.material
+          ? _buildMaterialVersion()
+          : _buildCupertinoVersion()
+    );
   }
 }
