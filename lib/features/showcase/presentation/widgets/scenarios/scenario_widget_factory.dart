@@ -10,7 +10,6 @@ import 'login_scenario.dart';
 import 'purchase_scenario.dart';
 import 'profile_scenario.dart';
 import 'settings_scenario.dart';
-import 'social_post_scenario.dart';
 
 class ScenarioWidgetFactory {
   static Widget createWidget(ShowcaseScenario scenario, WidgetStyle style) {
@@ -25,13 +24,6 @@ class ScenarioWidgetFactory {
         return SettingsScenario(style: style);
       case ShowcaseScenario.chat:
         return ChatScenario(style: style);
-      case ShowcaseScenario.socialPost:
-        return SocialPostScenario(style: style);
-      // Add other scenarios as we implement them
-      default:
-        return Center(
-          child: Text('Scenario ${scenario.title} not implemented yet'),
-        );
     }
   }
 }
