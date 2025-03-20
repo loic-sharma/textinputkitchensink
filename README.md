@@ -8,5 +8,5 @@ See it running live on the web at: [justinmc.github.io/textinputkitchensink/](ht
   1. flutter build web
   1. rm -rf docs
   1. cp -r build/web/ docs
-  1. Modify docs/index.html <base href="/"> to <base href="/textinputkitchensync/">
+  1. Modify docs/index.html <base href="/"> to <base href="/textinputkitchensink/">
   1. Commit and push to main.
