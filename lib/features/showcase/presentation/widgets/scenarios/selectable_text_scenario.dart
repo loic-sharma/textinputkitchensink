@@ -77,11 +77,9 @@ class _SelectableTextScenarioState extends State<SelectableTextScenario> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: AutofillGroup(
-        child: widget.style == WidgetStyle.material
-            ? _buildMaterialVersion()
-            : _buildCupertinoVersion(),
-      ),
+      child: widget.style == WidgetStyle.material
+        ? _buildMaterialVersion()
+        : _buildCupertinoVersion(),
     );
   }
 }

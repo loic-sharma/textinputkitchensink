@@ -13,6 +13,7 @@ enum ShowcaseScenario {
   ),
   chat(title: 'Chat', description: 'Message input field with send button'),
   settings(title: 'Settings', description: 'Profile editing form in settings'),
+  scroll(title: 'Scrollable', description: 'Scrollable list of text fields'),
   selectableText(
     title: 'Selectable text',
     description: 'Showcase different texts that support text selection',
