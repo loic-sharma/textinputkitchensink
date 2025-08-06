@@ -32,9 +32,10 @@ class _SelectableTextScenarioState extends State<SelectableTextScenario> {
       child: Column(
         spacing: 16.0,
         children: [
-          SelectableText(
-            'This is some text that a user can select and copy.',
-            style: TextStyle(fontSize: 16),
+          SelectableText('This is selectable text thanks to SelectableText!'),
+
+          SelectionArea(
+            child: Text('This is selectable text thanks to SelectionArea!'),
           ),
 
           TextField(
@@ -56,9 +57,10 @@ class _SelectableTextScenarioState extends State<SelectableTextScenario> {
       child: Column(
         spacing: 16.0,
         children: [
-          SelectableText(
-            'This is some text that a user can select and copy.',
-            style: TextStyle(fontSize: 16),
+          SelectableText('This is selectable text thanks to SelectableText!'),
+
+          SelectionArea(
+            child: Text('This is selectable text thanks to SelectionArea!'),
           ),
 
           CupertinoTextField(
