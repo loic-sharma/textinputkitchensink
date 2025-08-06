@@ -19,12 +19,14 @@ class ScenarioPage extends StatefulWidget {
 class _ScenarioPageState extends State<ScenarioPage> {
   WidgetStyle _currentStyle = WidgetStyle.material;
 
+  WidgetStyle get nextStyle => switch (_currentStyle) {
+    WidgetStyle.material => WidgetStyle.cupertino,
+    WidgetStyle.cupertino => WidgetStyle.material,
+  };
+
   void _toggleStyle() {
     setState(() {
-      _currentStyle =
-          _currentStyle == WidgetStyle.material
-              ? WidgetStyle.cupertino
-              : WidgetStyle.material;
+      _currentStyle = nextStyle;
     });
   }
 
@@ -36,12 +38,11 @@ class _ScenarioPageState extends State<ScenarioPage> {
         actions: [
           TextButton.icon(
             onPressed: _toggleStyle,
-            icon: Icon(
-              _currentStyle == WidgetStyle.material
-                  ? Icons.apple
-                  : Icons.android,
-            ),
-            label: Text(_currentStyle.title),
+            icon: Icon(switch (nextStyle) {
+              WidgetStyle.material => Icons.android,
+              WidgetStyle.cupertino => Icons.apple,
+            }),
+            label: Text(nextStyle.title),
           ),
         ],
       ),

@@ -12,7 +12,11 @@ enum ShowcaseScenario {
     description: 'Multi-field data entry form for profile creation',
   ),
   chat(title: 'Chat', description: 'Message input field with send button'),
-  settings(title: 'Settings', description: 'Profile editing form in settings');
+  settings(title: 'Settings', description: 'Profile editing form in settings'),
+  selectableText(
+    title: 'Selectable text',
+    description: 'Showcase different texts that support text selection',
+  );
 
   final String title;
   final String description;

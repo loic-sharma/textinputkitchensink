@@ -10,6 +10,7 @@ import 'login_scenario.dart';
 import 'purchase_scenario.dart';
 import 'profile_scenario.dart';
 import 'settings_scenario.dart';
+import 'selectable_text_scenario.dart';
 
 class ScenarioWidgetFactory {
   static Widget createWidget(ShowcaseScenario scenario, WidgetStyle style) {
@@ -24,6 +25,8 @@ class ScenarioWidgetFactory {
         return SettingsScenario(style: style);
       case ShowcaseScenario.chat:
         return ChatScenario(style: style);
+      case ShowcaseScenario.selectableText:
+        return SelectableTextScenario(style: style);
     }
   }
 }
